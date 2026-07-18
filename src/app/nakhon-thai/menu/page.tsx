@@ -23,7 +23,7 @@ export default function NakhonMenu() {
         ])}
       />
       <PageBanner title="Ons menu" />
-      <Deal brand={NAKHON} />
+      <Deal brand={NAKHON} variant="seigaiha" />
       <MenuList brand={NAKHON} />
       <Cta brand={NAKHON} />
     </>

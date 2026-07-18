@@ -23,7 +23,7 @@ export default function LangeMuurMenu() {
         ])}
       />
       <PageBanner title="Ons menu" />
-      <Deal brand={LANGE_MUUR} />
+      <Deal brand={LANGE_MUUR} variant="seigaiha" />
       <MenuList brand={LANGE_MUUR} />
       <Cta brand={LANGE_MUUR} />
     </>
