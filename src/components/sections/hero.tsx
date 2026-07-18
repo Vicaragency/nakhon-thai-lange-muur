@@ -1,8 +1,7 @@
-import Image from "next/image";
-
 import { SITE } from "@/lib/site-config";
 import type { Brand } from "@/lib/brands";
 import { Button } from "@/components/ui/button";
+import { HeroDishes } from "./hero-dishes";
 
 export function Hero({ brand }: { brand: Brand }) {
   return (
@@ -43,48 +42,9 @@ export function Hero({ brand }: { brand: Brand }) {
         </div>
       </div>
 
-      {/* Food-laag — geometrie 1:1 uit Figma (Hero-instance 231:25459).
-          Borden bloeden groot vanaf de onderrand; alleen de bovenkant is
-          zichtbaar. Hover tilt een bord omhoog zodat het volledig in beeld komt. */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-[-57px] h-[689px]">
-        {/* Volledige schermbreedte (geen max-w) → zijborden bloeden tot de schermrand. */}
-        <div className="relative h-full w-full overflow-hidden">
-          {/* linkerschotel (dim sum) — bloedt vanuit de linkerhoek */}
-          <div className="pointer-events-auto absolute bottom-[-188px] left-[-6.32%] right-[73.61%] hidden aspect-[471/487] transition-transform duration-300 ease-out will-change-transform hover:z-30 hover:-translate-y-12 sm:block">
-            <Image
-              src="/images/cta-dumplings.png"
-              alt="Thaise dim sum in een kom"
-              fill
-              sizes="480px"
-              className="object-contain object-top"
-            />
-          </div>
-          {/* centraal schelpgerecht — begrensd op max-w-1440 en gecentreerd,
-              zodat het op brede schermen niet mee-groeit over de knoppen/titel. */}
-          <div className="absolute inset-0 mx-auto max-w-[1440px]">
-            <div className="pointer-events-auto absolute bottom-[-260px] left-[28.47%] right-[26.74%] aspect-[645/656] transition-transform duration-300 ease-out will-change-transform hover:z-30 hover:-translate-y-12">
-              <Image
-                src="/images/hero-scallops.png"
-                alt="Gestoomde sint-jakobsschelpen met orchidee"
-                fill
-                priority
-                sizes="660px"
-                className="object-contain object-top"
-              />
-            </div>
-          </div>
-          {/* rechterschotel (soep) — bloedt vanuit de rechterhoek */}
-          <div className="pointer-events-auto absolute bottom-[-331px] left-[71.6%] right-[-20.42%] hidden aspect-[703/686] transition-transform duration-300 ease-out will-change-transform hover:z-30 hover:-translate-y-12 sm:block">
-            <Image
-              src="/images/cta-soup.png"
-              alt="Pittige Thaise soep"
-              fill
-              sizes="700px"
-              className="object-contain object-top"
-            />
-          </div>
-        </div>
-      </div>
+      {/* Food-laag — "rad"-animatie: middelste bord groot/hoog, zijborden kleiner;
+          bij hover draait het wiel en verschuiven de gerechten van plaats. */}
+      <HeroDishes />
     </section>
   );
 }
