@@ -33,6 +33,8 @@ export interface Brand {
   heroTitle: [string, string];
   /** Decoratieve tekens op de badges/banden (Thais schrift vs. Chinees). */
   scripts: { deal: string; tasty: string; homemade: string };
+  /** Borden voor het hero-"rad" (eerste item = middelste/prominente bord). */
+  heroDishes: { src: string; alt: string }[];
   menu: MenuCategory[];
   marquee: typeof MARQUEE_CATEGORIES;
   reviews: readonly { name: string; rating: number; text: string }[];
@@ -54,6 +56,11 @@ export const NAKHON: Brand = {
   region: "Thailand",
   heroTitle: ["Heerlijke Thaise keuken", "in het hart van Brugge"],
   scripts: { deal: "โปร", tasty: "อร่อย", homemade: "ทำเอง" },
+  heroDishes: [
+    { src: "/images/hero-scallops.png", alt: "Gestoomde sint-jakobsschelpen met orchidee" },
+    { src: "/images/cta-soup.png", alt: "Pittige Thaise soep" },
+    { src: "/images/cta-dumplings.png", alt: "Thaise dim sum in een kom" },
+  ],
   menu: MENU_CATEGORIES,
   marquee: MARQUEE_CATEGORIES,
   reviews: REVIEWS,
@@ -79,6 +86,13 @@ export const LANGE_MUUR: Brand = {
   region: "China",
   heroTitle: ["Heerlijke Chinese keuken", "in het hart van Brugge"],
   scripts: { deal: "优惠", tasty: "好吃", homemade: "家常" },
+  heroDishes: [
+    { src: "/images/lm-noodles.png", alt: "Gebakken noodles met groenten" },
+    { src: "/images/lm-chicken.png", alt: "Krokante kip met dipsaus" },
+    { src: "/images/lm-tofu.png", alt: "Tofu met broccoli en paddenstoelen" },
+    { src: "/images/lm-dumplings.png", alt: "Gefrituurde hapjes op rijst" },
+    { src: "/images/lm-fried.png", alt: "Gefrituurde loempia's met dipsaus" },
+  ],
   menu: LANGE_MUUR_MENU,
   marquee: MARQUEE_CATEGORIES,
   reviews: LANGE_MUUR_REVIEWS,

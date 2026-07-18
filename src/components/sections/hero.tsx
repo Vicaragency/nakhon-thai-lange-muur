@@ -43,8 +43,8 @@ export function Hero({ brand }: { brand: Brand }) {
       </div>
 
       {/* Food-laag — "rad"-animatie: middelste bord groot/hoog, zijborden kleiner;
-          bij hover draait het wiel en verschuiven de gerechten van plaats. */}
-      <HeroDishes />
+          klik draait het wiel en verschuift de gerechten van plaats. */}
+      <HeroDishes dishes={brand.heroDishes} />
     </section>
   );
 }
