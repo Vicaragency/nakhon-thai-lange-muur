@@ -57,9 +57,9 @@ export const NAKHON: Brand = {
   heroTitle: ["Heerlijke Thaise keuken", "in het hart van Brugge"],
   scripts: { deal: "โปร", tasty: "อร่อย", homemade: "ทำเอง" },
   heroDishes: [
-    { src: "/images/hero-scallops.png", alt: "Gestoomde sint-jakobsschelpen met orchidee" },
-    { src: "/images/cta-soup.png", alt: "Pittige Thaise soep" },
-    { src: "/images/cta-dumplings.png", alt: "Thaise dim sum in een kom" },
+    { src: "/images/hero-n-scallops.png", alt: "Gestoomde sint-jakobsschelpen met orchidee" },
+    { src: "/images/hero-n-soup.png", alt: "Pittige Thaise soep" },
+    { src: "/images/hero-n-dumplings.png", alt: "Thaise dim sum in een kom" },
   ],
   menu: MENU_CATEGORIES,
   marquee: MARQUEE_CATEGORIES,

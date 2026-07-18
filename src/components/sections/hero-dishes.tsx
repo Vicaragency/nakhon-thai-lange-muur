@@ -12,16 +12,17 @@ import { useState } from "react";
  */
 type Dish = { src: string; alt: string };
 
-// Slotstijlen per (signed) positie t.o.v. het midden. Slechts 3 zichtbaar
-// (midden + links + rechts); de rest wacht off-screen (opacity 0) en schuift
-// van opzij tevoorschijn bij het draaien.
+// Slotstijlen per (signed) positie t.o.v. het midden. Middenbord groot en hoog,
+// zijborden kleiner en lager. Slechts 3 zichtbaar; de rest wacht off-screen
+// (opacity 0) en schuift van opzij tevoorschijn bij het draaien. De bronfoto's
+// zijn genormaliseerd zodat elk gerecht in eenzelfde slot even groot oogt.
 const SLOT: Record<string, { transform: string; z: number; opacity: number }> = {
   "0": { transform: "translate(-50%, 0) scale(1)", z: 50, opacity: 1 },
   "1": { transform: "translate(calc(-50% + 30vw), 70px) scale(0.7)", z: 40, opacity: 1 },
   "-1": { transform: "translate(calc(-50% - 30vw), 70px) scale(0.7)", z: 40, opacity: 1 },
   // Off-screen wachtposities (net buiten beeld, doorzichtig).
-  offRight: { transform: "translate(calc(-50% + 72vw), 110px) scale(0.5)", z: 0, opacity: 0 },
-  offLeft: { transform: "translate(calc(-50% - 72vw), 110px) scale(0.5)", z: 0, opacity: 0 },
+  offRight: { transform: "translate(calc(-50% + 96vw), 110px) scale(0.55)", z: 0, opacity: 0 },
+  offLeft: { transform: "translate(calc(-50% - 96vw), 110px) scale(0.55)", z: 0, opacity: 0 },
 };
 
 export function HeroDishes({ dishes }: { dishes: Dish[] }) {
