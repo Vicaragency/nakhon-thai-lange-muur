@@ -1,0 +1,137 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: var(--font-din), "DIN Condensed", "Arial Narrow", sans-serif;
+  --font-heading: var(--font-display);
+
+  /* Nakhon Thai brand palette (uit Figma variables) */
+  --color-brand: #910402;
+  --color-brand-60: #7e0503;
+  --color-brand-dark: #5f0201;
+  --color-brand-40: #74200f;
+  --color-heading: #74200f;
+  --color-neon-red: #e7302d;
+  --color-hotpink: #ed3fa6;
+  --color-yellow: #ffb648;
+  --color-teal: #90e6e1;
+  --color-beige: #fbf8f1;
+  --color-beige-20: #fdefd4;
+  --color-beige-40: #e9b689;
+  --color-ink: #2a1109;
+
+  /* shadcn base (behouden voor de UI-primitives) */
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: #fbf8f1;
+  --foreground: #2a1109;
+  --card: #ffffff;
+  --card-foreground: #2a1109;
+  --popover: #ffffff;
+  --popover-foreground: #2a1109;
+  --primary: #910402;
+  --primary-foreground: #ffffff;
+  --secondary: #fdefd4;
+  --secondary-foreground: #74200f;
+  --muted: #f4efe6;
+  --muted-foreground: #8a7f72;
+  --accent: #fdefd4;
+  --accent-foreground: #74200f;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #ece4d6;
+  --input: #ece4d6;
+  --ring: #910402;
+  --radius: 0.625rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+  /* Gecondenseerde uppercase display-koppen (DIN Condensed, zelf-gehost) */
+  .heading-display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 0.98;
+    letter-spacing: 0.005em;
+  }
+
+  /*
+   * Seigaiha (Aziatisch spiraal/schub-patroon uit Figma "Frame 29"), tone-on-tone.
+   * Eén naadloze tegel, per achtergrond een eigen kleurvariant.
+   */
+  .bg-seigaiha {
+    background-color: #ffffff;
+    background-image: url("/patterns/seigaiha-light.svg");
+    background-size: 960px 630px;
+  }
+  .bg-seigaiha-beige {
+    background-color: var(--color-beige-20);
+    background-image: url("/patterns/seigaiha-cream.svg");
+    background-size: 960px 630px;
+  }
+  .bg-seigaiha-dark {
+    background-color: var(--color-brand-dark);
+    background-image: url("/patterns/seigaiha-dark.svg");
+    background-size: 960px 630px;
+  }
+
+  /* Marquee (horizontaal scrollende band). */
+  .animate-marquee {
+    animation: marquee 28s linear infinite;
+  }
+  .animate-marquee-slow {
+    animation: marquee 45s linear infinite;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
