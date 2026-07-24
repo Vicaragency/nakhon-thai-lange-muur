@@ -36,7 +36,7 @@ export function Hero({ brand }: { brand: Brand }) {
           <Button href={SITE.reserveUrl} variant="primary">
             Reserveren
           </Button>
-          <Button href={SITE.orderUrl} variant="soft">
+          <Button href={brand.orderUrl} variant="soft">
             Bestellen
           </Button>
         </div>

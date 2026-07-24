@@ -56,8 +56,15 @@ export function Button(props: ButtonAsLink | ButtonAsButton) {
     void _s;
     void _c;
     void _ch;
+    // Externe links (http/https) openen in een nieuw tabblad; een expliciete
+    // target op de aanroep blijft voorrang houden (staat na de defaults).
+    const external = /^https?:\/\//.test(props.href);
     return (
-      <Link className={classes} {...rest}>
+      <Link
+        className={classes}
+        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        {...rest}
+      >
         {children}
       </Link>
     );

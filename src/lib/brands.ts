@@ -21,6 +21,8 @@ export interface Brand {
   legalName: string;
   /** Root-relatief pad, bv. "/nakhon-thai". */
   basePath: string;
+  /** Externe orderticket.net-bestelpagina (afhaal/bezorg) voor dit merk. */
+  orderUrl: string;
   /** schema.org servesCuisine. */
   cuisine: string;
   /** Eyebrow boven de hero-titel. */
@@ -50,6 +52,7 @@ export const NAKHON: Brand = {
   name: "Nakhon Thai",
   legalName: "Nakhon Thai",
   basePath: "/nakhon-thai",
+  orderUrl: "https://nakhonthai-brugge.be/online-bestellen/",
   cuisine: "Thai",
   eyebrow: "Thais restaurant in Brugge",
   cuisineAdj: "Thaise",
@@ -80,6 +83,7 @@ export const LANGE_MUUR: Brand = {
   name: "De Lange Muur",
   legalName: "De Lange Muur",
   basePath: "/de-lange-muur",
+  orderUrl: "https://nakhonthai-brugge.be/order-online/",
   cuisine: "Chinese",
   eyebrow: "Chinees restaurant in Brugge",
   cuisineAdj: "Chinese",
@@ -118,7 +122,7 @@ export function navItems(brand: Brand) {
     { label: "Home", href: brand.basePath },
     { label: "Menu", href: `${brand.basePath}/menu` },
     { label: "Reserveren", href: SITE.reserveUrl },
-    { label: "Bestellen", href: SITE.orderUrl },
+    { label: "Bestellen", href: brand.orderUrl },
     { label: "Contact", href: `${brand.basePath}/contact` },
   ] as const;
 }

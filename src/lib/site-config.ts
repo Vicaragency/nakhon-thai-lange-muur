@@ -28,9 +28,10 @@ export const SITE = {
     countryCode: "BE",
     countryName: "België",
   },
-  /** Externe platforms. Vervang '#' door de echte URL's. */
-  reserveUrl: "#reserveren",
-  orderUrl: "#bestellen",
+  /** Externe platforms (openen in nieuw tabblad). */
+  // Reservaties via Zenchef; gedeeld (één zaak, twee keukens onder één dak).
+  reserveUrl: "https://bookings.zenchef.com/results?rid=367627&pid=1001",
+  // Bestellen verschilt per keuken -> zie `orderUrl` per merk in brands.ts.
   socials: {
     instagram: "https://instagram.com/",
     facebook: "https://facebook.com/",
@@ -114,12 +115,3 @@ export function buildMetadata({
     },
   };
 }
-
-/** Gedeelde navigatie-items (nav-overlay, footer). */
-export const NAV_ITEMS = [
-  { label: "Home", href: "/" },
-  { label: "Menu", href: "/menu" },
-  { label: "Reserveren", href: SITE.reserveUrl },
-  { label: "Bestellen", href: SITE.orderUrl },
-  { label: "Contact", href: "/contact" },
-] as const;

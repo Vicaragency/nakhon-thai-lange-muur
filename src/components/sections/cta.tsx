@@ -54,7 +54,7 @@ export function Cta({ brand }: { brand: Brand }) {
           <Button href={SITE.reserveUrl} variant="primary">
             Reserveren
           </Button>
-          <Button href={SITE.orderUrl} variant="white">
+          <Button href={brand.orderUrl} variant="white">
             Bestellen
           </Button>
         </div>

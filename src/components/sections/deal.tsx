@@ -84,7 +84,7 @@ export function Deal({
             Bestellen na 21u extra korting 5€ per bestelling! Minimum 35€
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-5">
-            <Button href={SITE.orderUrl} variant="primary">
+            <Button href={brand.orderUrl} variant="primary">
               Bestellen
             </Button>
             <a
