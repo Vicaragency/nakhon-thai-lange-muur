@@ -27,6 +27,13 @@ nakhonthai-brugge.be en bevat zelf geen inhoud.
 - Reserveren staat volledig los van het domein (bookings.zenchef.com) en blijft
       in alle gevallen werken.
 
+### DNS vóór de transfer
+De volledige DNS van de drie domeinen staat vastgelegd in
+[`docs/DNS_BASELINE.md`](docs/DNS_BASELINE.md) (21-08-2026). **Alle drie hebben
+actieve MX-records**, dus een transfer die de nameservers reset legt ook de mail
+stil, inclusief `info@nakhonthai.be`. Lees dat document vóór je een domein
+verzet.
+
 ## Geverifieerd (21-08-2026)
 - ✅ **Zenchef** — `rid=367627` = "Nakhon Thai - De Lange Muur", Philipstockstraat 12,
       8000 Bruges, tel. +3250331848, tijdzone Europe/Brussels, live betaalprovider.
