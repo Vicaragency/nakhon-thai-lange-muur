@@ -28,9 +28,20 @@ export const SITE = {
     countryCode: "BE",
     countryName: "België",
   },
-  /** Externe platforms (openen in nieuw tabblad). */
-  // Reservaties via Zenchef; gedeeld (één zaak, twee keukens onder één dak).
-  reserveUrl: "https://bookings.zenchef.com/results?rid=367627&pid=1001",
+  /**
+   * Externe platforms (openen in nieuw tabblad).
+   *
+   * Reservaties via Zenchef; gedeeld (één zaak, twee keukens onder één dak).
+   * rid=367627 = "Nakhon Thai - De Lange Muur". Zelfde URL als de zaak zelf al
+   * gebruikt, incl. pid=1001, zodat de attributie in Zenchef gelijk blijft.
+   *
+   * Overschrijfbaar via een env-var, zodat een verhuizing van het
+   * boekings- of bestelplatform geen code-wijziging vraagt: enkel de variabele
+   * in Vercel aanpassen en opnieuw deployen. Zie .env.example.
+   */
+  reserveUrl:
+    process.env.NEXT_PUBLIC_RESERVE_URL ||
+    "https://bookings.zenchef.com/results?rid=367627&pid=1001",
   // Bestellen verschilt per keuken -> zie `orderUrl` per merk in brands.ts.
   /**
    * Socials: vul de VOLLEDIGE profiel-URL in (bv. "https://www.instagram.com/nakhonthai.brugge/").

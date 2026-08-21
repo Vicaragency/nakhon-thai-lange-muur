@@ -21,7 +21,12 @@ export interface Brand {
   legalName: string;
   /** Root-relatief pad, bv. "/nakhon-thai". */
   basePath: string;
-  /** Externe orderticket.net-bestelpagina (afhaal/bezorg) voor dit merk. */
+  /**
+   * Externe bestelpagina (afhaal/bezorg) voor dit merk. Vandaag de
+   * WooCommerce-shop op nakhonthai-brugge.be; overschrijfbaar via env-var
+   * zodat een verhuizing naar bv. bestellen.nakhonthai.be of een ander
+   * platform geen code-wijziging vraagt. Zie .env.example.
+   */
   orderUrl: string;
   /** schema.org servesCuisine. */
   cuisine: string;
@@ -52,7 +57,9 @@ export const NAKHON: Brand = {
   name: "Nakhon Thai",
   legalName: "Nakhon Thai",
   basePath: "/nakhon-thai",
-  orderUrl: "https://nakhonthai-brugge.be/online-bestellen/",
+  orderUrl:
+    process.env.NEXT_PUBLIC_ORDER_URL_NAKHON ||
+    "https://nakhonthai-brugge.be/online-bestellen/",
   cuisine: "Thai",
   eyebrow: "Thais restaurant in Brugge",
   cuisineAdj: "Thaise",
@@ -83,7 +90,9 @@ export const LANGE_MUUR: Brand = {
   name: "De Lange Muur",
   legalName: "De Lange Muur",
   basePath: "/de-lange-muur",
-  orderUrl: "https://nakhonthai-brugge.be/order-online/",
+  orderUrl:
+    process.env.NEXT_PUBLIC_ORDER_URL_LANGE_MUUR ||
+    "https://nakhonthai-brugge.be/order-online/",
   cuisine: "Chinese",
   eyebrow: "Chinees restaurant in Brugge",
   cuisineAdj: "Chinese",
