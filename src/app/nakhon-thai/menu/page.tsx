@@ -5,6 +5,7 @@ import { Deal } from "@/components/sections/deal";
 import { MenuList } from "@/components/sections/menu-list";
 import { Cta } from "@/components/sections/cta";
 import { JsonLd, breadcrumbSchema } from "@/components/seo/json-ld";
+import { loadBrandMenu } from "@/lib/menu-source";
 import { NAKHON, buildBrandMetadata } from "@/lib/brands";
 
 export const metadata: Metadata = buildBrandMetadata(NAKHON, {
@@ -13,7 +14,14 @@ export const metadata: Metadata = buildBrandMetadata(NAKHON, {
   path: "/menu",
 });
 
-export default function NakhonMenu() {
+// De kaart komt live uit de webshop; elke 6 uur opnieuw ophalen.
+// Next wil hier een letterlijke waarde: houd dit gelijk met REVALIDATE in
+// src/lib/menu-source.ts (6 * 60 * 60).
+export const revalidate = 21600;
+
+export default async function NakhonMenu() {
+  const categories = await loadBrandMenu("nakhon-thai");
+
   return (
     <>
       <JsonLd
@@ -24,7 +32,7 @@ export default function NakhonMenu() {
       />
       <PageBanner title="Ons menu" />
       <Deal brand={NAKHON} variant="seigaiha" />
-      <MenuList brand={NAKHON} />
+      <MenuList categories={categories} />
       <Cta brand={NAKHON} />
     </>
   );

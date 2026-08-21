@@ -50,23 +50,26 @@ gelijkzetten, of de uren op de site aanpassen. Nu kan iemand om 17:30 boeken.
 
 ## Andere launch-taken
 - [ ] Custom domein koppelen in Vercel + DNS (zie de domein-waarschuwing hierboven).
-- [ ] **Reviews zijn verzonnen** — `REVIEWS` (`src/lib/menu.ts`) en
-      `LANGE_MUUR_REVIEWS` (`src/lib/menu-lange-muur.ts`) zijn placeholder-teksten
-      ("Bart", "Sofie", "Thomas") die met een Google-logo worden gepresenteerd.
-      Verzonnen reviews publiceren mag niet (EU-consumentenrecht). Vervang door
-      echte Google-reviews of haal de sectie weg vóór livegang.
-- [ ] **WK-deal is verlopen** — "Geldig tot en met 19 juli" + "WK deal" staat op
-      beide homepages en menupagina's (`src/components/sections/deal.tsx`).
-      Nieuwe actie of de sectie verwijderen.
+- [ ] **Reviews: echte tekst nodig** — de verzonnen placeholders zijn verwijderd en
+      de reviewsectie rendert nu niets zolang `REVIEWS` (`src/lib/menu.ts`) en
+      `LANGE_MUUR_REVIEWS` (`src/lib/menu-lange-muur.ts`) leeg zijn. Vul aan met
+      reviews die echt in het Google Bedrijfsprofiel staan (tekst + voornaam
+      letterlijk overnemen). Verzonnen reviews publiceren mag niet.
+- [ ] **Actie/deal: content nodig** — de verlopen WK-deal is eruit. Acties staan nu
+      in `src/lib/deals.ts` met een `validUntil`, en verlopen automatisch (de
+      home- en menupagina's revalideren). Beide merken staan op `null`, dus de
+      dealsectie is nu onzichtbaar. Nieuwe actie? Vul de config in.
+      Zet in de fineprint alleen kortingen die ook écht in de webshop
+      geconfigureerd staan (bv. de "na 21u -5€ vanaf 35€"-regel), anders belooft
+      de site iets dat bij het afrekenen niet klopt.
 - [ ] **Socials** — `SITE.socials` staat nu leeg (""); zolang die leeg is worden de
       iconen niet getoond en komen ze niet in de schema.org `sameAs`. De huidige
       site van de zaak heeft alleen een Facebook-icoon zonder link, dus de echte
       profiel-URL's moeten van de klant komen.
 - [ ] **Eigen fotografie** — `public/images/*` zijn stockplaatsen (gedeeld door beide merken).
       Vervang door echte foto's van beide keukens.
-- [ ] **Menukaarten** — Nakhon (`src/lib/menu.ts`, Thaise kaart) staat er; De Lange Muur
-      (`src/lib/menu-lange-muur.ts`, Chinese kaart) is overgenomen uit de Figma-placeholder
-      → laat de klant de echte Chinese menukaart + prijzen bevestigen.
+- [x] **Menukaarten** — komen nu live uit de webshop (zie hieronder). De Chinese
+      kaart is daarmee compleet: van 4 categorieën / 30 gerechten naar 18 / 68.
 - [ ] **E-mailadres De Lange Muur** — nu gedeeld `info@nakhonthai.be` (uit de Figma). Klopt dit,
       of heeft De Lange Muur een eigen adres? Zie `SITE.email`.
 - [ ] **Juridische pagina's** — privacy + algemene voorwaarden zijn gedeeld (huismerk Nakhon).
@@ -74,6 +77,32 @@ gelijkzetten, of de uren op de site aanpassen. Nu kan iemand om 17:30 boeken.
 - [ ] **WK-deal** — tijdsgebonden (`validUntil = "19 juli"`) op beide homes. Na afloop aanpassen.
 - [ ] OG-preview-afbeeldingen (`public/og/og-default.jpg`, `og-nakhon.jpg`, `og-lange-muur.jpg`)
       staan klaar met de huisstijl; vervang eventueel door echte foto's.
+
+## Menukaart: komt uit de webshop
+De menupagina's halen de kaart live uit de WooCommerce Store API van
+nakhonthai-brugge.be (`src/lib/menu-source.ts`). Dat is dezelfde bron waar de
+klant afrekent, dus de prijzen op de site kunnen niet meer uit de pas lopen. De
+pagina's revalideren elk 6 uur, dus een prijswijziging in WooCommerce staat
+binnen 6 uur op de site zonder nieuwe deploy.
+
+- **Terugval:** `src/lib/menu-snapshot.json` is gecommit. Ligt de webshop plat of
+  komt er een half antwoord terug (`validateMenu` keurt af), dan rendert de
+  pagina uit de snapshot en gaat de menupagina dus niet stuk.
+- **Snapshot bijwerken:** `npm run sync:menu`. Print een diff van wat er
+  bijkomt, wegvalt of van prijs verandert. Commit het resultaat mee.
+- **Thaise/Chinese tekens** staan niet in de webshop en komen uit de snapshot,
+  gematcht op code + naam. Nieuwe gerechten hebben nog geen teken; de kolom
+  wordt dan weggelaten voor die categorie. Aanvullen mag handmatig in
+  `menu-snapshot.json` (het sync-script neemt bestaande tekens over).
+- **Te controleren door de klant:**
+  - "Poke" en "Thaise fondue met grillplaat" hebben in de shop geen merk-prefix
+    en zijn door ons aan Nakhon Thai toegewezen (`UNPREFIXED` in
+    `src/lib/menu-normalize.ts`). Klopt dat?
+  - De shop bevat typfouten die wij niet stilzwijgend aanpassen, bv.
+    "Chine garnalen met ananas en zoetzure saus" en de categorie "VEGETARISH"
+    (die laatste tonen we als "Vegetarisch"). Laat de zaak dit in WooCommerce
+    rechtzetten, dan volgt de site automatisch.
+  - Categorie "Uncategorized" (2 producten) wordt bewust niet getoond.
 
 ## Architectuur (merk-systeem)
 Beide merken delen structuur, huisstijl (rood palet) en contactgegevens. Het verschil zit in

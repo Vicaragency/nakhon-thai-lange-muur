@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 import type { Brand } from "@/lib/brands";
+import { activeDeal } from "@/lib/deals";
 import { Button } from "@/components/ui/button";
 import { ScallopBadge } from "@/components/brand/ornaments";
 
@@ -28,16 +29,18 @@ function DealBand({ char }: { char: string }) {
 
 export function Deal({
   brand,
-  validUntil = "19 juli",
-  title = "WK deal",
   variant = "beige",
 }: {
   brand: Brand;
-  validUntil?: string;
-  title?: string;
   /** Achtergrond: "beige" (home) of "seigaiha" (wit patroon, zoals de menupagina). */
   variant?: "beige" | "seigaiha";
 }) {
+  // Geen actie of een verlopen actie: sectie helemaal niet renderen. Zie
+  // src/lib/deals.ts. De pagina's revalideren, dus een actie die vandaag
+  // eindigt verdwijnt vanzelf.
+  const deal = activeDeal(brand.key);
+  if (!deal) return null;
+
   return (
     <section className={variant === "seigaiha" ? "bg-seigaiha" : "bg-beige"}>
       <DealBand char={brand.scripts.deal} />
@@ -69,19 +72,17 @@ export function Deal({
         {/* Tekst */}
         <div>
           <span className="inline-block rounded-full bg-beige-20 px-4 py-1.5 text-[14px] font-semibold text-brand">
-            Geldig tot en met {validUntil}
+            Geldig tot en met {deal.validUntilLabel}
           </span>
           <h2 className="heading-display mt-4 text-[30px] text-heading sm:text-[34px] lg:text-[38px]">
-            Profiteer van onze <span className="text-neon-red">{title}</span>
+            Profiteer van onze <span className="text-neon-red">{deal.title}</span>
           </h2>
           <p className="mt-4 max-w-[500px] text-[16px] leading-relaxed text-ink/80">
-            Geen goesting om te koken tijdens het WK? Wij zorgen voor de smaken,
-            jij voor de sfeer. Bestel nu en geniet van vers bereide{" "}
-            {brand.cuisineAdj} gerechten. Geleverd voor de aftrap!
+            {deal.body.replace("{keuken}", brand.cuisineAdj)}
           </p>
-          <p className="mt-3 text-[14px] text-ink/45">
-            Bestellen na 21u extra korting 5€ per bestelling! Minimum 35€
-          </p>
+          {deal.fineprint ? (
+            <p className="mt-3 text-[14px] text-ink/45">{deal.fineprint}</p>
+          ) : null}
           <div className="mt-6 flex flex-wrap items-center gap-5">
             <Button href={brand.orderUrl} variant="primary">
               Bestellen

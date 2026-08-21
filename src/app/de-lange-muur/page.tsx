@@ -14,6 +14,11 @@ export const metadata: Metadata = buildBrandMetadata(LANGE_MUUR, {
   path: "/",
 });
 
+// Elk uur revalideren zodat een actie met een einddatum vanzelf van de pagina
+// verdwijnt (zie src/lib/deals.ts) in plaats van te blijven staan tot de
+// volgende deploy.
+export const revalidate = 3600;
+
 export default function LangeMuurHome() {
   return (
     <>

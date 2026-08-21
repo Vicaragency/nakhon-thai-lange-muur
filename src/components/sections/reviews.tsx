@@ -5,6 +5,10 @@ import { GoogleG } from "@/components/ui/icons";
 
 export function Reviews({ brand }: { brand: Brand }) {
   const REVIEWS = brand.reviews;
+  // Geen echte reviews beschikbaar: sectie niet renderen. Zie REVIEWS in
+  // src/lib/menu.ts voor waarom die lijst leeg staat.
+  if (REVIEWS.length === 0) return null;
+
   return (
     <section className="bg-yellow">
       <div className="mx-auto w-full max-w-[1320px] px-6 py-16 lg:py-20">

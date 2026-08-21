@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
 
 import { SITE } from "./site-config";
-import {
-  MENU_CATEGORIES,
-  MARQUEE_CATEGORIES,
-  REVIEWS,
-  type MenuCategory,
-} from "./menu";
-import { LANGE_MUUR_MENU, LANGE_MUUR_REVIEWS } from "./menu-lange-muur";
+import { MARQUEE_CATEGORIES, REVIEWS } from "./menu";
+import { LANGE_MUUR_REVIEWS } from "./menu-lange-muur";
 
 /**
  * Twee merken onder één dak (zelfde restaurant, Philipstockstraat 12 Brugge):
@@ -42,7 +37,12 @@ export interface Brand {
   scripts: { deal: string; tasty: string; homemade: string };
   /** Borden voor het hero-"rad" (eerste item = middelste/prominente bord). */
   heroDishes: { src: string; alt: string }[];
-  menu: MenuCategory[];
+  /**
+   * De menukaart zit hier bewust NIET in: die komt live uit de webshop via
+   * `loadBrandMenu()` in src/lib/menu-source.ts, met een gecommitte snapshot
+   * als terugval. Eén bron van waarheid, en `brands.ts` blijft licht genoeg
+   * voor de client components die het importeren.
+   */
   marquee: typeof MARQUEE_CATEGORIES;
   reviews: readonly { name: string; rating: number; text: string }[];
   defaultTitle: string;
@@ -71,7 +71,6 @@ export const NAKHON: Brand = {
     { src: "/images/hero-n-soup.png", alt: "Pittige Thaise soep" },
     { src: "/images/hero-n-dumplings.png", alt: "Thaise dim sum in een kom" },
   ],
-  menu: MENU_CATEGORIES,
   marquee: MARQUEE_CATEGORIES,
   reviews: REVIEWS,
   defaultTitle: "Nakhon Thai - Thais restaurant in het hart van Brugge",
@@ -106,7 +105,6 @@ export const LANGE_MUUR: Brand = {
     { src: "/images/lm-dumplings.png", alt: "Vers bereid Chinees gerecht" },
     { src: "/images/lm-fried.png", alt: "Vers bereid Chinees gerecht" },
   ],
-  menu: LANGE_MUUR_MENU,
   marquee: MARQUEE_CATEGORIES,
   reviews: LANGE_MUUR_REVIEWS,
   defaultTitle: "De Lange Muur - Chinees restaurant in het hart van Brugge",

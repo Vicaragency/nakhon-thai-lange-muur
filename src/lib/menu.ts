@@ -123,21 +123,19 @@ export const MARQUEE_CATEGORIES = [
   { label: "Visgerechten", image: "/images/hero-squid.png" },
 ] as const;
 
-/** Klantreviews (Google). */
-export const REVIEWS = [
-  {
-    name: "Bart",
-    rating: 5,
-    text: "Heerlijk gegeten! Verse, authentieke Thaise gerechten en een gezellige sfeer in het hart van Brugge. Zeker een aanrader.",
-  },
-  {
-    name: "Sofie",
-    rating: 5,
-    text: "De dim sum is fantastisch en het personeel super vriendelijk. We komen zeker terug. Ook ideaal om af te halen.",
-  },
-  {
-    name: "Thomas",
-    rating: 5,
-    text: "Beste Thai van Brugge. Ruime keuze, eerlijke prijzen en alles smaakt vers bereid. Reserveren is wel aangeraden.",
-  },
-] as const;
+/**
+ * Klantreviews.
+ *
+ * LEEG GEHOUDEN, EN DAT IS OPZETTELIJK. Hier stonden placeholder-reviews
+ * ("Bart", "Sofie", "Thomas") met voor beide merken dezelfde tekst, en de
+ * sectie toont er een Google-logo bij. Verzonnen of niet-verifieerbare reviews
+ * publiceren als echte klantbeoordelingen is een misleidende handelspraktijk
+ * (EU-Omnibusrichtlijn, omgezet in het Belgische WER). Zolang deze lijst leeg
+ * is, rendert de reviewsectie niets.
+ *
+ * Vullen met echte reviews? Neem de tekst en de voornaam letterlijk over uit
+ * het Google Bedrijfsprofiel van de zaak (of van RestaurantGuru), en alleen
+ * reviews die er echt staan.
+ */
+export const REVIEWS: readonly { name: string; rating: number; text: string }[] =
+  [];

@@ -62,21 +62,12 @@ export const LANGE_MUUR_MENU: MenuCategory[] = [
   },
 ];
 
-/** Klantreviews (Google) — Chinese context. */
-export const LANGE_MUUR_REVIEWS = [
-  {
-    name: "Bart",
-    rating: 5,
-    text: "Heerlijk gegeten! Verse, authentieke Chinese gerechten en een gezellige sfeer in het hart van Brugge. Zeker een aanrader.",
-  },
-  {
-    name: "Sofie",
-    rating: 5,
-    text: "De dim sum is fantastisch en het personeel super vriendelijk. We komen zeker terug. Ook ideaal om af te halen.",
-  },
-  {
-    name: "Thomas",
-    rating: 5,
-    text: "Beste Chinees van Brugge. Ruime keuze, eerlijke prijzen en alles smaakt vers bereid. Reserveren is wel aangeraden.",
-  },
-] as const;
+/**
+ * Klantreviews De Lange Muur. Leeg om dezelfde reden als bij Nakhon Thai:
+ * zie de toelichting bij REVIEWS in src/lib/menu.ts.
+ */
+export const LANGE_MUUR_REVIEWS: readonly {
+  name: string;
+  rating: number;
+  text: string;
+}[] = [];
