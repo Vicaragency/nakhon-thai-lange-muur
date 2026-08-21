@@ -2,8 +2,19 @@ import Link from "next/link";
 
 import { SITE } from "@/lib/site-config";
 import { navItems, type Brand } from "@/lib/brands";
+import { externalLinkProps } from "@/lib/utils";
 import { DiamondRosette } from "@/components/brand/ornaments";
 import { InstagramIcon, FacebookIcon, TiktokIcon } from "@/components/ui/icons";
+
+/**
+ * Alleen ingevulde socials tonen: een placeholder-link naar de homepage van
+ * Instagram/Facebook/TikTok is een dode link voor de bezoeker. Zie SITE.socials.
+ */
+const SOCIALS = [
+  { href: SITE.socials.instagram, label: "Instagram", Icon: InstagramIcon },
+  { href: SITE.socials.facebook, label: "Facebook", Icon: FacebookIcon },
+  { href: SITE.socials.tiktok, label: "TikTok", Icon: TiktokIcon },
+].filter((s) => s.href.length > 0);
 
 function ColumnHeading({ children }: { children: React.ReactNode }) {
   return (
@@ -35,24 +46,22 @@ export function SiteFooter({ brand }: { brand: Brand }) {
               </a>
             </p>
           </div>
-          <div className="mt-5 flex items-center justify-center gap-3">
-            {[
-              { href: SITE.socials.instagram, label: "Instagram", Icon: InstagramIcon },
-              { href: SITE.socials.facebook, label: "Facebook", Icon: FacebookIcon },
-              { href: SITE.socials.tiktok, label: "TikTok", Icon: TiktokIcon },
-            ].map(({ href, label, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="flex size-9 items-center justify-center rounded-md bg-white text-brand transition-transform hover:-translate-y-0.5"
-              >
-                <Icon className="size-[18px]" />
-              </a>
-            ))}
-          </div>
+          {SOCIALS.length > 0 ? (
+            <div className="mt-5 flex items-center justify-center gap-3">
+              {SOCIALS.map(({ href, label, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex size-9 items-center justify-center rounded-md bg-white text-brand transition-transform hover:-translate-y-0.5"
+                >
+                  <Icon className="size-[18px]" />
+                </a>
+              ))}
+            </div>
+          ) : null}
         </div>
 
         {/* Navigatie */}
@@ -61,6 +70,7 @@ export function SiteFooter({ brand }: { brand: Brand }) {
             <Link
               key={item.label}
               href={item.href}
+              {...externalLinkProps(item.href)}
               className="heading-display text-[26px] leading-none text-white/90 transition-colors hover:text-white"
             >
               {item.label}

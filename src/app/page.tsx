@@ -83,9 +83,10 @@ export default function SplashPage() {
       {/* Centrale merk-badge + adreslijn, over beide deuren */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex flex-col items-center px-6 pt-8 text-center text-white">
         <OrnamentDivider className="text-beige-40/80" />
-        <p className="mt-3 text-[13px] font-semibold uppercase tracking-[0.18em] text-white/85">
-          Twee keukens onder één dak
-        </p>
+        {/* Enige <h1> van de splash: de merknamen in de deuren zijn <h2>. */}
+        <h1 className="mt-3 text-[13px] font-semibold uppercase tracking-[0.18em] text-white/85">
+          Nakhon Thai &amp; De Lange Muur: twee keukens onder één dak
+        </h1>
         <p className="mt-1 text-[13px] text-white/65">
           {SITE.address.street}, {SITE.address.postalCode} {SITE.address.city}
         </p>

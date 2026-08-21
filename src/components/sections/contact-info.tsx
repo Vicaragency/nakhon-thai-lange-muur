@@ -1,6 +1,7 @@
 import { SITE } from "@/lib/site-config";
 import type { Brand } from "@/lib/brands";
 import { DiamondRosette } from "@/components/brand/ornaments";
+import { OpeningHours } from "./opening-hours";
 
 function DetailBlock({
   title,
@@ -19,9 +20,6 @@ function DetailBlock({
 }
 
 export function ContactInfo({ brand }: { brand: Brand }) {
-  // Vandaag markeren in de urentabel (ma=0 ... zo=6).
-  const todayIndex = (new Date().getDay() + 6) % 7;
-
   return (
     <section className="bg-beige">
       <div className="mx-auto w-full max-w-[1180px] px-6 pb-20">
@@ -36,31 +34,7 @@ export function ContactInfo({ brand }: { brand: Brand }) {
               className="size-full min-h-[340px] border-0"
             />
           </div>
-          <div className="p-7 lg:p-9">
-            <div className="flex items-center justify-between">
-              <h2 className="heading-display text-[24px] text-heading">
-                7 op 7 open
-              </h2>
-              <span className="inline-flex items-center gap-2 rounded-full bg-green-100 px-3 py-1 text-[13px] font-semibold text-green-700">
-                <span className="size-2 rounded-full bg-green-600" />
-                Open
-              </span>
-            </div>
-            <ul className="mt-5">
-              {SITE.openingHours.map((row, i) => (
-                <li
-                  key={row.day}
-                  className={`grid grid-cols-[1fr_auto_auto] items-center gap-4 rounded-lg px-3 py-2 text-[15px] ${
-                    i === todayIndex ? "bg-beige-20 font-semibold" : ""
-                  }`}
-                >
-                  <span className="text-ink/90">{row.day}</span>
-                  <span className="tabular-nums text-ink/70">{row.lunch}</span>
-                  <span className="tabular-nums text-ink/70">{row.dinner}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <OpeningHours />
         </div>
 
         {/* Gegevens + adres */}

@@ -146,6 +146,8 @@ const blokken: Block[] = [
           Gegevensbeschermingsautoriteit, Drukpersstraat 35, 1000 Brussel (
           <a
             href="https://www.gegevensbeschermingsautoriteit.be"
+            target="_blank"
+            rel="noopener noreferrer"
             className="underline"
           >
             www.gegevensbeschermingsautoriteit.be

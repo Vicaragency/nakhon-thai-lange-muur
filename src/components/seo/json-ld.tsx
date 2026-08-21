@@ -66,6 +66,12 @@ function openingHoursSpecification() {
 
 /** Restaurant-schema met NAP, keuken, prijsklasse en openingsuren (per merk). */
 export function restaurantSchema(brand: Brand): JsonObject {
+  const sameAs = [
+    SITE.socials.instagram,
+    SITE.socials.facebook,
+    SITE.socials.tiktok,
+  ].filter((url) => url.length > 0);
+
   return {
     "@context": "https://schema.org",
     "@type": "Restaurant",
@@ -76,7 +82,8 @@ export function restaurantSchema(brand: Brand): JsonObject {
     image: abs(brand.ogImage),
     description: brand.description,
     email: SITE.email,
-    telephone: SITE.phone,
+    // E.164 zodat Google/Apple het nummer eenduidig kan interpreteren.
+    telephone: SITE.phoneHref,
     servesCuisine: brand.cuisine,
     priceRange: SITE.priceRange,
     currenciesAccepted: "EUR",
@@ -85,11 +92,9 @@ export function restaurantSchema(brand: Brand): JsonObject {
     address: postalAddress(),
     areaServed: { "@type": "City", name: SITE.address.city },
     openingHoursSpecification: openingHoursSpecification(),
-    sameAs: [
-      SITE.socials.instagram,
-      SITE.socials.facebook,
-      SITE.socials.tiktok,
-    ],
+    // Alleen ingevulde profielen: een `sameAs` naar instagram.com/ (de homepage
+    // van het platform) is een verkeerd signaal voor de knowledge graph.
+    ...(sameAs.length > 0 ? { sameAs } : {}),
   };
 }
 

@@ -32,11 +32,16 @@ export const SITE = {
   // Reservaties via Zenchef; gedeeld (één zaak, twee keukens onder één dak).
   reserveUrl: "https://bookings.zenchef.com/results?rid=367627&pid=1001",
   // Bestellen verschilt per keuken -> zie `orderUrl` per merk in brands.ts.
+  /**
+   * Socials: vul de VOLLEDIGE profiel-URL in (bv. "https://www.instagram.com/nakhonthai.brugge/").
+   * Laat leeg ("") zolang er geen echt profiel is: leeg = het icoon wordt niet
+   * getoond en de link komt ook niet in de schema.org `sameAs` terecht.
+   */
   socials: {
-    instagram: "https://instagram.com/",
-    facebook: "https://facebook.com/",
-    tiktok: "https://tiktok.com/",
-  },
+    instagram: "",
+    facebook: "",
+    tiktok: "",
+  } as Record<"instagram" | "facebook" | "tiktok", string>,
   /** Google Maps embed voor de contactpagina (Philipstockstraat, Brugge). */
   mapEmbedSrc:
     "https://www.google.com/maps?q=Philipstockstraat+12,+8000+Brugge&output=embed",

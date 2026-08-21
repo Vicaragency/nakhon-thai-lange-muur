@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils";
+import { cn, externalLinkProps } from "@/lib/utils";
 
 /**
  * Actie-knop in de Nakhon Thai-stijl (Reserveren / Bestellen / links).
@@ -58,13 +58,8 @@ export function Button(props: ButtonAsLink | ButtonAsButton) {
     void _ch;
     // Externe links (http/https) openen in een nieuw tabblad; een expliciete
     // target op de aanroep blijft voorrang houden (staat na de defaults).
-    const external = /^https?:\/\//.test(props.href);
     return (
-      <Link
-        className={classes}
-        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-        {...rest}
-      >
+      <Link className={classes} {...externalLinkProps(props.href)} {...rest}>
         {children}
       </Link>
     );

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
-import { SITE } from "@/lib/site-config";
 import type { Brand } from "@/lib/brands";
 import { Button } from "@/components/ui/button";
 import { ScallopBadge } from "@/components/brand/ornaments";

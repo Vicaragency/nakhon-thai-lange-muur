@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 
-import { cn } from "@/lib/utils";
+import { cn, externalLinkProps, isExternalHref } from "@/lib/utils";
 import { navItems, type Brand } from "@/lib/brands";
 import { Logo } from "./logo";
 
@@ -50,6 +50,10 @@ export function SiteHeader({ brand }: { brand: Brand }) {
           open ? "opacity-100" : "pointer-events-none opacity-0",
         )}
         aria-hidden={!open}
+        // `inert` haalt de dichte overlay uit de tab-orde en uit de
+        // toegankelijkheidsboom: zonder dit blijven de nav-links focusbaar
+        // terwijl ze onzichtbaar zijn (aria-hidden + focusbaar = WCAG-fout).
+        inert={!open}
       >
         <div className="mx-auto flex h-full w-full max-w-[1320px] flex-col px-6 py-5">
           <div className="flex items-center justify-between">
@@ -66,7 +70,7 @@ export function SiteHeader({ brand }: { brand: Brand }) {
 
           <nav className="flex flex-1 flex-col items-center justify-center gap-5 pb-16">
             {items.map((item) => {
-              const isInternal = item.href.startsWith("/");
+              const isInternal = !isExternalHref(item.href);
               const active =
                 isInternal &&
                 (item.href === brand.basePath
@@ -76,6 +80,7 @@ export function SiteHeader({ brand }: { brand: Brand }) {
                 <Link
                   key={item.label}
                   href={item.href}
+                  {...externalLinkProps(item.href)}
                   onClick={() => setOpen(false)}
                   className={cn(
                     "heading-display relative text-[44px] leading-none transition-colors sm:text-[56px]",

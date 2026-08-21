@@ -74,7 +74,9 @@ export function HeroDishes({ dishes }: { dishes: Dish[] }) {
                 src={dish.src}
                 alt={dish.alt}
                 fill
-                priority
+                // Alleen het bord in het midden is LCP-kandidaat; de andere
+                // borden staan buiten beeld en hoeven niet voorgeladen.
+                priority={isCenter}
                 sizes="520px"
                 draggable={false}
                 className="pointer-events-none object-contain object-bottom drop-shadow-xl"
